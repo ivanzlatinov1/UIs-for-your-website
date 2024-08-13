@@ -1,0 +1,86 @@
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+span {
+    background: url("https://cdn3.iconfinder.com/data/icons/emoji-1-4/64/_love_heart_smiley-256.png");
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-size: cover;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: animation 6s linear;
+}
+
+@keyframes animation {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        filter: hue-rotate(0);
+    }
+    100% {
+        transform: translate(-50%, -5000%);
+        opacity: 0;
+        filter: hue-rotate(720deg);
+    }
+}
+
+.input {
+    visibility: hidden;
+}
+
+.label {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background-color: hsla(0, 0%, 83%, 0.73);
+    border-radius: 20px;
+    align-self: center;
+    cursor: pointer;
+}
+
+.circle {
+    width: 34px;
+    background-color: white;
+    height: 34px;
+    border-radius: 50%;
+    top: 3px;
+    position: absolute;
+    left: 3px;
+    animation: toggleOff 0.4s linear forwards;
+}
+
+.input:checked + .label{
+    background-color: black;
+}
+
+.input:checked + .label .circle{
+    animation: toggleOn 0.4s linear forwards;
+    background-color: hsla(0, 0%, 83%, 0.73);
+}
+
+@keyframes toggleOn {
+    0%{
+        transform: translate(0px);
+    }
+    100%{
+        transform: translate(40px);
+    }
+}
+
+@keyframes toggleOff {
+    0%{
+        transform: translate(40px);
+    }
+    100%{
+        transform: translate(0px);
+    }
+}
