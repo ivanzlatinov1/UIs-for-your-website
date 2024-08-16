@@ -1,0 +1,460 @@
+body {
+    font-family: "Sansita Swashed", system-ui;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    background-color: black;
+    background-image: url(assets/background.png);
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 55%;
+    margin-right: 20px;
+}
+
+.lap-container {
+    margin-top: 50px;
+    width: 30%;
+    height: 70vh;
+    background-color: hsl(228, 21%, 14%);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.lap-container::after,
+.lap-container::before {
+    content: '';
+    background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 20px;
+    padding: 10px;
+    animation: 3s spin linear infinite;
+}
+
+.lap-container::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+
+.laps {
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.lap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.laps span {
+    font-size: 30px;
+    margin: 10px;
+}
+
+h1 {
+    font-size: 60px;
+    color: #fff;
+    text-shadow:
+        1px 1px 2px rgba(255, 255, 255, 0.729),
+        2px 2px 4px rgba(255, 255, 255, 0.536),
+        4px 4px 6px rgba(255, 255, 255, 0.337);
+}
+
+.lap-container h2 {
+    font-weight: 600;
+    font-style: normal;
+    font-size: 40px;
+}
+
+.stopwatch {
+    width: 35%;
+    height: calc(55%);
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-circle {
+    position: absolute;
+    width: 1200px;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-circle circle {
+    fill: none;
+    stroke-width: 8;
+}
+
+.progress-circle-background {
+    stroke: grey;
+}
+
+.progress-circle-foreground {
+    stroke: rgba(53, 255, 53, 0.611);
+    stroke-dasharray: 565.48;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.1s;
+}
+
+.stopwatch-fill {
+    bottom: 202px;
+    position: absolute;
+    background-color: hsl(228, 21%, 14%);
+    width: 30%;
+    height: calc(55%);
+    border-radius: 50%;
+    z-index: 1;
+    text-align: center;
+}
+
+.stopwatch-counter {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Sansita Swashed", system-ui;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 55px;
+}
+
+.controls {
+    display: flex;
+    gap: 125px;
+    margin-top: 50px;
+}
+
+.btn {
+    background-color: hsl(228, 21%, 14%);
+    width: 130px;
+    height: 65px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-family: "Sansita Swashed", system-ui;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 25px;
+    position: relative;
+}
+
+.btn .animation-span {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 50%;
+    top: 50%;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+    z-index: 1;
+}
+
+.btn:hover .animation-span {
+    width: 100%;
+    height: 100%;
+}
+
+button span {
+    position: relative;
+    color: white;
+    z-index: 3;
+}
+
+.btn .animation-span {
+    background-color: hsl(228, 21%, 40%);
+}
+
+.btn:hover .animation-span {
+    background-color: hsl(228, 21%, 20%);
+}
+
+.btn:active .animation-span {
+    background-color: hsl(228, 21%, 60%);
+}
+
+.btn::after,
+.btn::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.btn::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+#reset::before,
+#reset::after {
+    background-image: conic-gradient(from var(--angle), transparent 70%, red);
+    animation: 3s spin linear infinite;
+}
+
+#start::before,
+#start::after {
+    background-image: conic-gradient(from var(--angle), transparent 70%, green);
+    animation: 3s spin linear infinite;
+}
+
+.counter {
+    display: none;
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
+}
+
+@media (max-width: 1286px) {
+    .stopwatch {
+        visibility: hidden;
+        border: none;
+        box-shadow: none;
+    }
+
+    .stopwatch-fill {
+        width: 36%;
+    }
+
+    .counter {
+        position: absolute;
+        display: block;
+        font-family: "Sansita Swashed", system-ui;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 50px;
+        bottom: 410px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .stopwatch {
+        visibility: hidden;
+        border: none;
+        box-shadow: none;
+    }
+
+    .stopwatch-fill {
+        width: 38%;
+    }
+
+    .counter {
+        position: absolute;
+        display: block;
+        font-family: "Sansita Swashed", system-ui;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 50px;
+        bottom: 410px;
+    }
+}
+
+
+@media (max-width: 1112px) {
+    .stopwatch {
+        visibility: hidden;
+        border: none;
+        box-shadow: none;
+    }
+
+    .stopwatch-fill {
+        width: 41%;
+    }
+
+    .counter {
+        position: absolute;
+        display: block;
+        font-family: "Sansita Swashed", system-ui;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 50px;
+        bottom: 410px;
+    }
+}
+
+@media (max-width: 1020px) {
+    .stopwatch {
+        visibility: hidden;
+        border: none;
+        box-shadow: none;
+    }
+
+    .stopwatch-fill {
+        width: 45%;
+    }
+
+    .counter {
+        position: absolute;
+        display: block;
+        font-family: "Sansita Swashed", system-ui;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 50px;
+        bottom: 410px;
+    }
+}
+
+@media (max-width: 990px) {
+    .stopwatch {
+        visibility: hidden;
+        border: none;
+        box-shadow: none;
+    }
+
+    .stopwatch-fill {
+        display: none;
+    }
+
+    .counter {
+        position: absolute;
+        display: block;
+        font-family: "Sansita Swashed", system-ui;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 50px;
+        bottom: 410px;
+    }
+}
+
+@media (max-width: 860px) {
+
+    body {
+        font-family: "Sansita Swashed", system-ui;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+        background-color: black;
+        background-image: url(assets/background.png);
+        color: rgb(255, 255, 255);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90vh;
+        overflow: hidden;
+        gap: 100px;
+    }
+
+    .lap-container {
+        width: 50%;
+        height: 40%;
+    }
+
+    .container {
+        width: 50%;
+        height: 40%;
+    }
+
+    .stopwatch {
+        visibility: hidden;
+        border: none;
+        box-shadow: none;
+    }
+
+    .progress-circle {
+        position: absolute;
+        top: 40px;
+        width: 900px;
+        height: 50%;
+        transform: rotate(-90deg);
+    }
+    
+    .progress-circle circle {
+        fill: none;
+        stroke-width: 8;
+    }
+    
+    .progress-circle-background {
+        stroke: grey;
+    }
+    
+    .progress-circle-foreground {
+        stroke: rgba(53, 255, 53, 0.611);
+        stroke-dasharray: 565.48;
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset 0.1s;
+    }
+
+    h1 {
+        position: absolute;
+        font-size: 42px;
+        margin-bottom: 200px;
+    }
+    .counter {
+        font-size: 30px;
+        margin-bottom: 150px;
+    }
+
+    .controls {
+        margin-top: 450px;
+        gap: 250px;
+    }
+
+    .btn {
+        width: 30%;
+    }
+}
